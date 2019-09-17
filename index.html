@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>  wang    </title>
+		<style>
+			*{
+				padding:0;
+				margin: 0;
+			}
+			body{
+				width: 100%;
+				position: fixed;
+				height: 100%;
+				background:url(img/background.jpg) no-repeat;
+				background-size:cover;
+			}
+			.yxq{
+				position: fixed;
+				width: 100%;
+				overflow: hidden;
+			}
+			#flsh{
+				position: absolute;
+				background:url(img/wangxiaozhang.png) no-repeat;
+				background-size:cover;
+			}
+			.xxp{
+				background-color: brown;
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+			}
+			.left{
+				width: 25%;
+				float: left;
+			}
+			.yd{
+				border: red 1px solid;
+					background:url(img/regou1.png) no-repeat;
+				  position: absolute;
+				background-size:cover;
+			}
+			.shi0{
+				position: absolute;
+				width: 35px;
+				height: 20px;
+				background:url(img/regou1.png) no-repeat;
+				background-size:cover;
+			}
+			.shi1{
+				width: 50px;
+				height: 30px;
+			
+			}
+			.shi2{
+				width: 70px;
+				height: 40px;
+
+			}
+			.shi3{
+				width: 90px;
+				height: 55px;
+
+			}
+			.shi4{
+				width: 130px;
+				height: 75px;
+
+			}
+			
+			.rightshi{
+				right: 0;
+			}
+		</style>
+		<script src="js/jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+			<div class="xxp">
+		  		<div class="left">
+		  			<span>分数：</span> <span id=fenshu>300</span>
+		  		</div>
+		  		<div class="left">
+		  			<span>难度：</span> <span id="nandu">2</span>
+		  		</div>
+		  		<div class="left">
+		  		     吃
+		  		</div>
+		  		<div class="left">
+		  			<button>添加新怪物</button>
+		  		</div>
+		  	</div>
+		  	
+		  	<div class="yxq" id="yxq">
+		        <div id="flsh"> </div>
+		    </div>
+		  <!--<div class="shi0"></div>
+		   <div class="shi1" style="left: 1px;top:1%;"></div>-->
+		  <script>
+		  	  $("#yxq").css("height",$("body").outerHeight()-30+"px");
+		  	  
+		  		var width=25;
+        	  	var height=25;
+        	 var flsh=$("#flsh");
+        	 flsh.css("width",width+"px");
+        	 flsh.css("height",height+"px");
+        	 var down=10;
+             var left=10;
+		  	$(document).keydown(function(event){
+		  		var e = event || window.event || arguments.callee.caller.arguments[0]; 
+					  switch (e && e.keyCode){
+			            	case 40:                  //下
+			            
+			            	   	if($("#flsh").offset().top-30+$("#flsh").outerHeight()<$("#yxq").outerHeight()){
+			            	   down+=10;
+			            	    flsh.css("top",down+"px");
+			            	   }
+			            		break;
+			            	case 38:
+			            	    if($("#flsh").offset().top!=30){
+			            	    down-=10;
+			            	    flsh.css("top",down+"px");
+			            	    }
+			            		break;
+			            	case 37:
+			            	    if($("#flsh").offset().left!=0){
+			            	    left-=10;
+			            	    flsh.css("left",left+"px");
+			            	    }
+			            		break;
+			            	case 39:
+			            	    if($("#flsh").offset().left<$("#yxq").outerWidth()-$("#flsh").outerWidth()){
+			            	    left+=10;
+			            	    flsh.css("left",left+"px");
+			            	    }
+			            		break;
+			            	default: 
+			            		break;
+			            }
+		  	})
+		  	
+		  	
+		  	  $("#yxq").mousemove(function (e) {
+                //获取鼠标坐标：
+                var X = e.pageX;
+                var Y = e.pageY;
+                //获取鼠标坐标e.pageX e.pageY
+                flsh.css({"left": e.pageX, "top": e.pageY-30 });
+            });
+
+		  	
+		//  	var sjs=Math.floor(Math.random()*10);
+		 // 	var sj=Math.floor(Math.random()*(1+1));
+		 
+		  	function qwe(){
+		  		var fangxc="",fangxiangs="";
+		  		var fx=Math.floor(Math.random()*(3+1));     // 生成的 方向
+		  		var ci=Math.floor(Math.random()*(3+2));  //次数
+		  		 var sj=Math.floor(Math.random()*(3+1));    // 生产 大小
+			      var sjs=Math.floor(Math.random()*(101-0+1));  // 位置
+			     var sja=Math.floor(Math.random()*(4+1));     // 生产 大小 2
+				var sjsa=Math.floor(Math.random()*(100-1+1)+10);  // 位置 2
+		  		switch(fx){
+		  			case 0:
+		  			  fangxc="leftshi";
+		  			  fangxiangs="top";
+		  			  //  for(var i=0;i<ci;i++){
+		  			    //	 var sj=Math.floor(Math.random()*(3+1));    // 生产 大小
+			             //    var sjs=Math.floor(Math.random()*(100-1+1)+10);  // 位置
+		  			    	$("#yxq").prepend('<div class="yd shi'+sj+" "+fangxc+' " style="'+fangxiangs+':'+sjs+'%;"></div>');
+                          	
+		  			  //  }
+		  			    //	var sja=Math.floor(Math.random()*(4+1));     // 生产 大小 2
+					  	//	var sjsa=Math.floor(Math.random()*(100-1+1)+10);  // 位置 2
+		  			      $("#yxq").prepend('<div class="yd shi'+sja+" "+fangxc+'" style="'+fangxiangs+':'+sjsa+'%"></div>');
+		  			    break;
+		  			case 1:
+		  			  	$("#yxq").prepend('<div class="yd bottomshi shi'+sj+'" style="bottom:0;left:'+sjs+'%"></div>');
+		  	        	$("#yxq").prepend('<div class="yd bottomshi shi'+sja+'" style="bottom:0;left:'+sjsa+'%;"></div>');
+		  			  break;
+		  			case 2:
+		  			   $("#yxq").prepend('<div class="yd rightshi shi'+sj+'" style="right:0;top:'+sjs+'%"></div>');
+		  	        	$("#yxq").prepend('<div class="yd rightshi shi'+sja+'" style="right:0;top:'+sjsa+'%;"></div>');
+		  			  break;
+		  			case 3:
+		  			   $("#yxq").prepend('<div class="yd topshi shi'+sj+'" style="top:0;left:'+sjs+'%"></div>');
+		  	        	$("#yxq").prepend('<div class="yd topshi shi'+sja+'" style="top:0;left:'+sjsa+'%;"></div>');
+		  			   break;
+		  		}
+		  		
+		  		
+	
+		  	
+		  	//	shi();
+		  	//	bshi();
+		  	}
+		  	
+		 	setInterval(qwe,400);  // 速度
+		  	function shi(){
+		  		var flshleft=$("#flsh").offset().left;
+		  		var flshtop=$("#flsh").offset().top;
+		  		var flshwidth=flsh.outerWidth();
+		  		var flshheight=flsh.outerHeight();
+		  		
+		  		   $(".leftshi").each(function(){
+		  		    var ydtop=$(this).offset().top;
+		  		   	var ydleft=$(this).offset().left;
+		  		   	var ydwidth=$(this).outerWidth();
+		  		   	var ydheight=$(this).outerHeight();
+			  		if($(this).offset().left>$("#yxq").outerWidth()){
+			  			$(this).remove();
+			  		}else{
+			  		//	if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( ( flshtop+flshheight-ydtop>=0 &&  flshtop-ydtop<=0 ) || (flshtop-ydtop>0 && ydtop-flshtop+flshheight>0 )  )   ){
+			  			if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( flshtop+flshheight-ydtop >=0 && ydtop+ydheight-flshtop >=0  )   ){
+			  		
+			  				if(ydheight<flshheight){
+			  					flsh.css("width",flshwidth+5+"px");
+			  					flsh.css("height",flshheight+5+"px");
+			  					$(this).remove();
+			  				}else{
+			  					location.reload();
+			  					alert("游戏结束");
+			  				}
+			  			}else{
+			  				
+			  			}
+			  		$(this).css("left",$(this).offset().left+8+"px");
+			  		}
+			  		
+		  		})
+		  	}
+		  	 
+		  	 
+		  	 
+		  	 
+		  	function bshi(){
+		  		var flshleft=$("#flsh").offset().left;
+		  		var flshtop=$("#flsh").offset().top;
+		  		var flshwidth=flsh.outerWidth();
+		  		var flshheight=flsh.outerHeight();
+		  	
+		  		   $(".bottomshi").each(function(){
+		  		    var ydtop=$(this).offset().top;
+		  		   	var ydleft=$(this).offset().left;
+		  		   	var ydwidth=$(this).outerWidth();
+		  		   	var ydheight=$(this).outerHeight();
+			  		if($(this).offset().top<ydheight){
+			  			$(this).remove();
+			  		}else{
+			  		//	if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( ( flshtop+flshheight-ydtop>=0 &&  flshtop-ydtop<=0 ) || (flshtop-ydtop>0 && ydtop-flshtop+flshheight>0 )  )   ){
+			  			if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( flshtop+flshheight-ydtop >=0 && ydtop+ydheight-flshtop >=0  )   ){
+			  		
+			  				if(ydheight<flshheight){
+			  					flsh.css("width",flshwidth+1+"px");
+			  					flsh.css("height",flshheight+1+"px");
+			  					$(this).remove();
+			  				}else{
+			  					location.reload();
+			  					alert("游戏结束");
+			  				}
+			  			}else{
+			  				
+			  			}
+			 	 $(this).css("bottom",parseInt($(this).css("bottom"))+10+"px");
+			  		}
+			  		
+		  		})
+		  	}
+		  	 
+		  	 
+		  	   	 
+		  	function rshi(){
+		  		var flshleft=$("#flsh").offset().left;
+		  		var flshtop=$("#flsh").offset().top;
+		  		var flshwidth=flsh.outerWidth();
+		  		var flshheight=flsh.outerHeight();
+		  		   $(".rightshi").each(function(){
+		  		    var ydtop=$(this).offset().top;
+		  		   	var ydleft=$(this).offset().left;
+		  		   	var ydwidth=$(this).outerWidth();
+		  		   	var ydheight=$(this).outerHeight();
+			  		if($(this).offset().left<0){
+			  			
+			  			$(this).remove();
+			  		}else{
+			  		//	if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( ( flshtop+flshheight-ydtop>=0 &&  flshtop-ydtop<=0 ) || (flshtop-ydtop>0 && ydtop-flshtop+flshheight>0 )  )   ){
+			  			if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( flshtop+flshheight-ydtop >=0 && ydtop+ydheight-flshtop >=0  )   ){
+			  		
+			  				if(ydheight<flshheight){
+			  					flsh.css("width",flshwidth+1+"px");
+			  					flsh.css("height",flshheight+1+"px");
+			  					$(this).remove();
+			  				}else{
+			  					location.reload();
+			  					alert("游戏结束");
+			  				}
+			  			}else{
+			  				
+			  			}
+			 	 $(this).css("right",parseInt($(this).css("right"))+10+"px");
+			  		}
+			  		
+		  		})
+		  	}
+		  	 
+		  	 
+		  	 
+		  	 	function tshi(){
+		  		var flshleft=$("#flsh").offset().left;
+		  		var flshtop=$("#flsh").offset().top;
+		  		var flshwidth=flsh.outerWidth();
+		  		var flshheight=flsh.outerHeight();
+		  		   $(".topshi").each(function(){
+		  		    var ydtop=$(this).offset().top;
+		  		   	var ydleft=$(this).offset().left;
+		  		   	var ydwidth=$(this).outerWidth();
+		  		   	var ydheight=$(this).outerHeight();
+		  		  // 	console.log($(".yxp").outerHeight());
+			  		if(ydtop>$(".yxq").outerHeight()){
+			  			$(this).remove();
+			  		}else{
+			  		//	if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( ( flshtop+flshheight-ydtop>=0 &&  flshtop-ydtop<=0 ) || (flshtop-ydtop>0 && ydtop-flshtop+flshheight>0 )  )   ){
+			  			if( ydleft-flshleft+ydwidth>=0 && ydleft-flshleft<=flshwidth && ( flshtop+flshheight-ydtop >=0 && ydtop+ydheight-flshtop >=0  )   ){
+			  		
+			  				if(ydheight<flshheight){
+			  					flsh.css("width",flshwidth+1+"px");
+			  					flsh.css("height",flshheight+1+"px");
+			  					$(this).remove();
+			  				}else{
+			  					location.reload();
+			  					alert("游戏结束");
+			  				}
+			  			}else{
+			  				
+			  			}
+			  			// $(this).css("bottom",0);
+			 //console.log(parseInt($(this).css("bottom")));
+			 	 $(this).css("top",parseInt($(this).css("top"))+10+"px");
+			  		}
+			  		
+		  		})
+		  	}
+		  	 
+		  	       
+		  	 	  	setInterval(bshi,50);
+                  	setInterval(rshi,50);
+                  	setInterval(tshi,50);
+		  	dh=setInterval(shi,50);
+	
+
+		  	
+		  	
+		  	
+//		  	var flsh=document.getElementById("flsh");
+//	
+//		  	var width=50;
+//		  	var height=50;
+//          flsh.style.width=width+"px";
+//          flsh.style.height=height+"px";
+//		    var down=10;
+//	        var left=10;
+//　　　　document.onkeydown=function(event){
+//          var e = event || window.event || arguments.callee.caller.arguments[0]; 
+//          var width=flsh.style.width;
+//          switch (e && e.keyCode){
+//          	case 40:                  //下
+//          	   if(true){   
+//          	   	alert($("#flsh").offsetLeft);
+//          	   down+=10;
+//          	    flsh.style.top=down+"px";
+//          	   }
+//          		break;
+//          	case 38:
+//          	    down-=10;
+//          	    flsh.style.top=down+"px";
+//          		break;
+//          	case 37:
+//          	    left-=10;
+//          	    flsh.style.left=left+"px";
+//          		break;
+//          	case 39:
+//          	    left+=10;
+//          	    flsh.style.left=left+"px";
+//          		break;
+//          	default:
+//          		break;
+//          }
+//      };
+//      
+ 
+         
+ </script>
+	</body>
+</html>
